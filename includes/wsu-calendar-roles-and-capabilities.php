@@ -26,6 +26,4 @@ class WSU_Calendar_Roles_And_Capabilities {
 		}
 	}
 }
-if ( defined( 'WP_INSTALLING' ) && false == WP_INSTALLING ) {
-	new WSU_Calendar_Roles_And_Capabilities();
-}
+new WSU_Calendar_Roles_And_Capabilities();
