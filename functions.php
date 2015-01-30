@@ -14,6 +14,19 @@ function wsu_calendar_new_user_member( $user_id ) {
 	add_user_to_blog( get_current_blog_id(), $user_id, 'subscriber' );
 }
 
+add_action( 'admin_menu', 'wsu_calendar_user_auto_role' );
+/**
+ * Add all logged in users in the admin screen to the Calendar.
+ */
+function wsu_calendar_user_auto_role() {
+	if ( is_user_logged_in() && ! is_user_member_of_blog() ) {
+		add_user_to_blog( get_current_blog_id(), get_current_user_id(), 'subscriber' );
+		wp_safe_redirect( admin_url( '/post-new.php?post_type=tribe_events' ) );
+		exit;
+		
+	}
+}
+
 add_action( 'rss2_item', 'wsu_calendar_rss_item' );
 /**
  * Add calendar specific items to the events feed. The WSU mobile team looks
