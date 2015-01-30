@@ -5,6 +5,15 @@ include_once( __DIR__ . '/includes/wsu-calendar-roles-and-capabilities.php' );
 // If a user authenticates with WSU AD, and they don't exist as a user, add them as a user.
 add_filter( 'wsuwp_sso_create_new_user', '__return_true' );
 
+add_action( 'wsuwp_sso_user_created', 'wsu_calendar_new_user_member', 10, 1 );
+/**
+ * Add new users created through the SSO plugin as subscribers to the site.
+ * @param $user_id
+ */
+function wsu_calendar_new_user_member( $user_id ) {
+	add_user_to_blog( get_current_blog_id(), $user_id, 'subscriber' );
+}
+
 add_action( 'rss2_item', 'wsu_calendar_rss_item' );
 /**
  * Add calendar specific items to the events feed. The WSU mobile team looks
