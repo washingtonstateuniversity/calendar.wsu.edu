@@ -23,7 +23,7 @@ function wsu_calendar_user_auto_role() {
 		add_user_to_blog( get_current_blog_id(), get_current_user_id(), 'subscriber' );
 		wp_safe_redirect( admin_url( '/post-new.php?post_type=tribe_events' ) );
 		exit;
-		
+
 	}
 }
 
